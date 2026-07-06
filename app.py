@@ -1,28 +1,42 @@
-from pyforge.code_parser import CodeParser
+from pyforge.project_analyzer import ProjectAnalyzer
 
 
 def main():
+    print("=" * 50)
+    print("        Welcome to PyForge")
+    print("=" * 50)
 
-    file_path = input("Enter Python file path: ")
+    project_path = input("\nEnter project folder path: ")
 
-    parser = CodeParser(file_path)
+    analyzer = ProjectAnalyzer(project_path)
 
-    result = parser.analyze()
+    results = analyzer.analyze_project()
 
-    print("\n========== IMPORTS ==========")
+    print("\n")
+    print("=" * 50)
+    print("PROJECT ANALYSIS")
+    print("=" * 50)
 
-    for item in result["imports"]:
-        print(item)
+    print(f"Total Python Files: {len(results)}")
 
-    print("\n========== CLASSES ==========")
+    for result in results:
 
-    for item in result["classes"]:
-        print(item)
+        print("\n" + "-" * 50)
+        print(f"File : {result['file_name']}")
 
-    print("\n========== FUNCTIONS ==========")
+        print(
+            f"Imports : {len(result['analysis']['imports'])}"
+        )
 
-    for item in result["functions"]:
-        print(item)
+        print(
+            f"Classes : {len(result['analysis']['classes'])}"
+        )
+
+        print(
+            f"Functions : {len(result['analysis']['functions'])}"
+        )
+
+    print("\nAnalysis Completed Successfully!")
 
 
 if __name__ == "__main__":

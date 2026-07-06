@@ -94,3 +94,13 @@ class ProjectScanner:
                 project_data["other_files"].append(file)
 
         return project_data
+    
+    
+    def get_python_files(self):
+        """
+        Return a list of all Python files in the project.
+        """
+
+        project_data = self.scan_project()
+
+        return project_data["python_files"]
