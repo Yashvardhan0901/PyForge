@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>PyForge Report</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f8;
+margin:40px;
+}
+
+h1{
+color:#2c3e50;
+}
+
+.card{
+background:white;
+padding:20px;
+margin-bottom:20px;
+border-radius:10px;
+box-shadow:0px 0px 10px rgba(0,0,0,.1);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:10px;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:8px;
+text-align:left;
+}
+
+th{
+background:#3498db;
+color:white;
+}
+
+img{
+width:700px;
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>PyForge Analysis Report</h1>
+
+<div class="card">
+
+<h2>Project Summary</h2>
+
+<p><b>Total Python Files:</b> {{ total_files }}</p>
+
+</div>
+
+{% for file in files %}
+
+<div class="card">
+
+<h2>{{ file.file_name }}</h2>
+
+<table>
+
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+
+<tr>
+<td>Imports</td>
+<td>{{ file.analysis.imports|length }}</td>
+</tr>
+
+<tr>
+<td>Classes</td>
+<td>{{ file.analysis.classes|length }}</td>
+</tr>
+
+<tr>
+<td>Functions</td>
+<td>{{ file.analysis.functions|length }}</td>
+</tr>
+
+<tr>
+<td>Lines of Code</td>
+<td>{{ file.metrics.total_lines }}</td>
+</tr>
+
+<tr>
+<td>Blank Lines</td>
+<td>{{ file.metrics.blank_lines }}</td>
+</tr>
+
+<tr>
+<td>Maintainability Index</td>
+<td>{{ file.metrics.maintainability_index }}</td>
+</tr>
+
+</table>
+
+</div>
+
+{% endfor %}
+
+<h2>Dependency Graph</h2>
+
+<img src="../dependency_graph.png">
+
+</body>
+
+</html>

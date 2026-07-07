@@ -1,8 +1,10 @@
 from pyforge.project_analyzer import ProjectAnalyzer
 from pyforge.dependency import DependencyGraph
+from pyforge.report_generator import ReportGenerator
 
 
 def main():
+
     print("=" * 50)
     print("        Welcome to PyForge")
     print("=" * 50)
@@ -36,28 +38,18 @@ def main():
             f"Maintainability Index : {result['metrics']['maintainability_index']}"
         )
 
-        print("\nCyclomatic Complexity:")
-
-        if result["metrics"]["complexity"]:
-
-            for func in result["metrics"]["complexity"]:
-
-                print(
-                    f"   {func['name']} : {func['complexity']}"
-                )
-
-        else:
-            print("   No functions found.")
-
-    # Generate Dependency Graph
     graph = DependencyGraph(results)
-
     graph.build_graph()
+    graph.save_graph()
 
-    output = graph.save_graph()
+    report = ReportGenerator(results)
+    report_path = report.generate()
 
-    print("\n" + "=" * 50)
-    print(f"Dependency Graph Saved As : {output}")
+    print("\n")
+    print("=" * 50)
+    print(f"Dependency Graph : dependency_graph.png")
+    print(f"HTML Report      : {report_path}")
+    print("=" * 50)
 
     print("\nAnalysis Completed Successfully!")
 
