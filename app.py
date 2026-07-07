@@ -1,4 +1,5 @@
 from pyforge.project_analyzer import ProjectAnalyzer
+from pyforge.dependency import DependencyGraph
 
 
 def main():
@@ -38,10 +39,25 @@ def main():
         print("\nCyclomatic Complexity:")
 
         if result["metrics"]["complexity"]:
+
             for func in result["metrics"]["complexity"]:
-                print(f"   {func['name']} : {func['complexity']}")
+
+                print(
+                    f"   {func['name']} : {func['complexity']}"
+                )
+
         else:
             print("   No functions found.")
+
+    # Generate Dependency Graph
+    graph = DependencyGraph(results)
+
+    graph.build_graph()
+
+    output = graph.save_graph()
+
+    print("\n" + "=" * 50)
+    print(f"Dependency Graph Saved As : {output}")
 
     print("\nAnalysis Completed Successfully!")
 
