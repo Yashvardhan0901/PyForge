@@ -3,14 +3,12 @@ from jinja2 import Environment, FileSystemLoader
 
 
 class ReportGenerator:
-
     """
     Generates HTML report using Jinja2.
     """
 
-    def __init__(self, results):
-
-        self.results = results
+    def __init__(self, analysis_data):
+        self.analysis_data = analysis_data
 
     def generate(self):
 
@@ -25,15 +23,13 @@ class ReportGenerator:
         )
 
         html = template.render(
-            total_files=len(self.results),
-            files=self.results
+            total_files=self.analysis_data["summary"]["total_files"],
+            files=self.analysis_data["files"],
+            summary=self.analysis_data["summary"]
         )
 
         report_folder = Path("reports")
-
-        report_folder.mkdir(
-            exist_ok=True
-        )
+        report_folder.mkdir(exist_ok=True)
 
         output_file = report_folder / "analysis_report.html"
 
