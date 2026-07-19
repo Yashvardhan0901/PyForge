@@ -28,3 +28,19 @@ reports/*.html
 
 # Logs
 *.log
+
+# Generated Reports
+reports/
+
+# Generated Images
+dependency_graph.png
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# Virtual Environment
+venv/
+
+# Distribution
+.dist/

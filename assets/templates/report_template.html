@@ -1,52 +1,233 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>PyForge Report</title>
+<title>PyForge Analysis Report</title>
 
 <style>
 
-body{
-font-family:Arial;
-background:#f4f6f8;
-margin:40px;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-h1{
-color:#2c3e50;
+body{
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:#f4f7fb;
+
+    color:#333;
+
+    padding:40px;
+
+}
+
+.container{
+
+    max-width:1300px;
+
+    margin:auto;
+
+}
+
+.header{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:30px;
+
+    border-radius:12px;
+
+    margin-bottom:30px;
+
+}
+
+.header h1{
+
+    font-size:38px;
+
+}
+
+.header p{
+
+    margin-top:8px;
+
+    font-size:18px;
+
+}
+
+.generated{
+
+    margin-top:15px;
+
+    font-size:14px;
+
+    opacity:.9;
+
+}
+
+.section{
+
+    background:white;
+
+    padding:25px;
+
+    margin-bottom:25px;
+
+    border-radius:12px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+}
+
+.section h2{
+
+    margin-bottom:20px;
+
+    color:#2563eb;
+
+}
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
 }
 
 .card{
-background:white;
-padding:20px;
-margin-bottom:20px;
-border-radius:10px;
-box-shadow:0px 0px 10px rgba(0,0,0,.1);
+
+    background:#eef4ff;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    text-align:center;
+
+}
+
+.card h3{
+
+    color:#555;
+
+    font-size:16px;
+
+}
+
+.card h1{
+
+    margin-top:10px;
+
+    color:#2563eb;
+
+}
+
+.health{
+
+    padding:15px;
+
+    border-radius:8px;
+
+    margin-top:20px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+}
+
+.good{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+.medium{
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+}
+
+.bad{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
 }
 
 table{
-width:100%;
-border-collapse:collapse;
-margin-top:10px;
-}
 
-th,td{
-border:1px solid #ddd;
-padding:8px;
-text-align:left;
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:15px;
+
 }
 
 th{
-background:#3498db;
-color:white;
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:12px;
+
+}
+
+td{
+
+    padding:10px;
+
+    border-bottom:1px solid #ddd;
+
+}
+
+tr:nth-child(even){
+
+    background:#f9fafb;
+
 }
 
 img{
-width:700px;
-margin-top:20px;
+
+    width:100%;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+}
+
+.footer{
+
+    text-align:center;
+
+    margin-top:40px;
+
+    color:#666;
+
+    font-size:14px;
+
 }
 
 </style>
@@ -55,68 +236,272 @@ margin-top:20px;
 
 <body>
 
-<h1>PyForge Analysis Report</h1>
+<div class="container">
 
-<div class="card">
+<div class="header">
 
-<h2>Project Summary</h2>
+<h1>🔥 PyForge Analysis Report</h1>
 
-<p><b>Total Python Files:</b> {{ total_files }}</p>
+<p>Professional Python Static Code Analysis</p>
+
+<div class="generated">
+
+Generated on {{ generated_time }}
 
 </div>
 
-{% for file in files %}
+</div>
+
+<div class="section">
+
+<h2>Project Summary</h2>
+
+<div class="cards">
 
 <div class="card">
+<h3>Files</h3>
+<h1>{{ summary.total_files }}</h1>
+</div>
 
-<h2>{{ file.file_name }}</h2>
+<div class="card">
+<h3>Classes</h3>
+<h1>{{ summary.total_classes }}</h1>
+</div>
+
+<div class="card">
+<h3>Functions</h3>
+<h1>{{ summary.total_functions }}</h1>
+</div>
+
+<div class="card">
+<h3>Imports</h3>
+<h1>{{ summary.total_imports }}</h1>
+</div>
+
+<div class="card">
+<h3>Avg MI</h3>
+<h1>{{ summary.average_maintainability }}</h1>
+</div>
+
+<div class="card">
+<h3>Avg Complexity</h3>
+<h1>{{ summary.average_complexity }}</h1>
+</div>
+
+<div class="card">
+<h3>Code Smells</h3>
+<h1>{{ summary.total_code_smells }}</h1>
+</div>
+
+<div class="card">
+<h3>Health</h3>
+<h1>{{ summary.health_score }}/100</h1>
+</div>
+
+</div>
+
+{% if summary.health_score >= 90 %}
+
+<div class="health good">
+
+Excellent Project Quality
+
+</div>
+
+{% elif summary.health_score >= 75 %}
+
+<div class="health medium">
+
+Good Project Quality
+
+</div>
+
+{% else %}
+
+<div class="health bad">
+
+Needs Improvement
+
+</div>
+
+{% endif %}
+
+</div>
+
+<div class="section">
+
+<h2>File Analysis</h2>
 
 <table>
 
 <tr>
-<th>Metric</th>
-<th>Value</th>
+
+<th>File</th>
+
+<th>LOC</th>
+
+<th>Imports</th>
+
+<th>Classes</th>
+
+<th>Functions</th>
+
+<th>Maintainability</th>
+
 </tr>
 
-<tr>
-<td>Imports</td>
-<td>{{ file.analysis.imports|length }}</td>
-</tr>
+{% for file in files %}
 
 <tr>
-<td>Classes</td>
-<td>{{ file.analysis.classes|length }}</td>
-</tr>
 
-<tr>
-<td>Functions</td>
-<td>{{ file.analysis.functions|length }}</td>
-</tr>
+<td>{{ file.file_name }}</td>
 
-<tr>
-<td>Lines of Code</td>
 <td>{{ file.metrics.total_lines }}</td>
-</tr>
 
-<tr>
-<td>Blank Lines</td>
-<td>{{ file.metrics.blank_lines }}</td>
-</tr>
+<td>{{ file.analysis.imports|length }}</td>
 
-<tr>
-<td>Maintainability Index</td>
+<td>{{ file.analysis.classes|length }}</td>
+
+<td>{{ file.analysis.functions|length }}</td>
+
 <td>{{ file.metrics.maintainability_index }}</td>
+
 </tr>
+
+{% endfor %}
 
 </table>
 
 </div>
+<div class="section">
+
+<h2>🏆 Top Complex Functions</h2>
+
+{% if top_complex_functions %}
+
+<table>
+
+<tr>
+
+<th>File</th>
+
+<th>Function</th>
+
+<th>Complexity</th>
+
+</tr>
+
+{% for item in top_complex_functions %}
+
+<tr>
+
+<td>{{ item.file }}</td>
+
+<td>{{ item.function }}</td>
+
+<td>{{ item.complexity }}</td>
+
+</tr>
 
 {% endfor %}
 
-<h2>Dependency Graph</h2>
+</table>
 
-<img src="../dependency_graph.png">
+{% else %}
+
+<p>No complex functions detected.</p>
+
+{% endif %}
+
+</div>
+
+<div class="section">
+
+<h2>⚠️ Code Smells</h2>
+
+{% if code_smells %}
+
+<table>
+
+<tr>
+
+<th>Severity</th>
+
+<th>Type</th>
+
+<th>Description</th>
+
+</tr>
+
+{% for smell in code_smells %}
+
+<tr>
+
+<td>
+
+{% if smell.severity == "High" %}
+
+🔴 High
+
+{% elif smell.severity == "Medium" %}
+
+🟡 Medium
+
+{% else %}
+
+🟢 Low
+
+{% endif %}
+
+</td>
+
+<td>{{ smell.type }}</td>
+
+<td>{{ smell.message }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% else %}
+
+<p>🎉 No code smells detected.</p>
+
+{% endif %}
+
+</div>
+
+<div class="section">
+
+<h2>🕸 Dependency Graph</h2>
+
+<img src="../dependency_graph.png" alt="Dependency Graph">
+
+</div>
+
+<div class="footer">
+
+<hr style="margin-bottom:20px;">
+
+<h3>🔥 Generated by PyForge v1.0</h3>
+
+<p>
+
+Python • AST • Radon • NetworkX • Streamlit • Plotly • Jinja2
+
+</p>
+
+<p style="margin-top:10px;">
+
+Professional Python Static Code Analysis Tool
+
+</p>
+
+</div>
+
+</div>
 
 </body>
 

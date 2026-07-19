@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 
 class DependencyGraph:
     """
-    Builds a dependency graph for the project based
-    on internal Python imports.
+    Builds an internal dependency graph for the project
+    based on project imports.
     """
 
     def __init__(self, analysis_results):
@@ -19,7 +19,6 @@ class DependencyGraph:
         internal project imports.
         """
 
-        # Store all project modules
         project_modules = {
             Path(result["file_name"]).stem: result
             for result in self.analysis_results
@@ -28,6 +27,7 @@ class DependencyGraph:
         for result in self.analysis_results:
 
             current_module = Path(result["file_name"]).stem
+
             imports = result["analysis"]["imports"]
 
             has_dependency = False
@@ -36,7 +36,7 @@ class DependencyGraph:
 
                 parts = imp.split(".")
 
-                # Ignore third-party imports
+                # Ignore external libraries
                 if parts[0] != "pyforge":
                     continue
 
@@ -49,24 +49,33 @@ class DependencyGraph:
                     continue
 
                 if imported_module in project_modules:
+
                     self.graph.add_edge(
                         current_module,
                         imported_module
                     )
+
                     has_dependency = True
 
-            # Add isolated node only if it contains code
+            # Include standalone modules
             if (
                 has_dependency
                 or result["analysis"]["functions"]
                 or result["analysis"]["classes"]
             ):
+
                 self.graph.add_node(current_module)
 
-    def save_graph(self, output_file="dependency_graph.png"):
+    def save_graph(self):
         """
-        Save dependency graph as PNG.
+        Save dependency graph inside reports folder.
         """
+
+        report_folder = Path("reports")
+
+        report_folder.mkdir(exist_ok=True)
+
+        output_file = report_folder / "dependency_graph.png"
 
         plt.figure(figsize=(13, 9))
 
@@ -76,25 +85,31 @@ class DependencyGraph:
             k=2.2
         )
 
-        # Highlight app.py
         node_colors = []
 
         for node in self.graph.nodes():
 
             if node == "app":
-                node_colors.append("orange")
+
+                node_colors.append("#F59E0B")
 
             elif node == "project_analyzer":
-                node_colors.append("lightgreen")
+
+                node_colors.append("#22C55E")
+
+            elif node == "streamlit_app":
+
+                node_colors.append("#2563EB")
 
             else:
-                node_colors.append("skyblue")
+
+                node_colors.append("#7DD3FC")
 
         nx.draw_networkx_nodes(
             self.graph,
             pos,
             node_color=node_colors,
-            node_size=3000,
+            node_size=3200,
             edgecolors="black"
         )
 
@@ -112,16 +127,18 @@ class DependencyGraph:
             arrowstyle="-|>",
             arrowsize=22,
             width=2,
-            edge_color="gray"
+            edge_color="#6B7280"
         )
 
         plt.title(
             "PyForge Internal Dependency Graph",
-            fontsize=16,
+            fontsize=18,
             fontweight="bold"
         )
 
         plt.axis("off")
+
+        plt.tight_layout()
 
         plt.savefig(
             output_file,

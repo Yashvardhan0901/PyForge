@@ -106,7 +106,7 @@ graph = DependencyGraph(results)
 
 graph.build_graph()
 
-graph.save_graph()
+graph_path = graph.save_graph()
 
 report = ReportGenerator(analysis_data)
 
@@ -413,14 +413,14 @@ with tab5:
 
     st.subheader("Project Dependency Graph")
 
-    graph_path = Path("dependency_graph.png")
+    graph_path = Path("reports/dependency_graph.png")
 
     if graph_path.exists():
 
         st.image(
-            str(graph_path),
-            use_container_width=True
-        )
+        str(graph_path),
+        width="stretch"
+    )
 
     else:
 

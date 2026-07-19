@@ -1,13 +1,16 @@
 from pathlib import Path
+from datetime import datetime
+
 from jinja2 import Environment, FileSystemLoader
 
 
 class ReportGenerator:
     """
-    Generates HTML report using Jinja2.
+    Generates a professional HTML report for PyForge.
     """
 
     def __init__(self, analysis_data):
+
         self.analysis_data = analysis_data
 
     def generate(self):
@@ -23,12 +26,27 @@ class ReportGenerator:
         )
 
         html = template.render(
-            total_files=self.analysis_data["summary"]["total_files"],
+
+            summary=self.analysis_data["summary"],
+
             files=self.analysis_data["files"],
-            summary=self.analysis_data["summary"]
+
+            top_complex_functions=self.analysis_data[
+                "top_complex_functions"
+            ],
+
+            code_smells=self.analysis_data[
+                "code_smells"
+            ],
+
+            generated_time=datetime.now().strftime(
+                "%d %B %Y %I:%M %p"
+            )
+
         )
 
         report_folder = Path("reports")
+
         report_folder.mkdir(exist_ok=True)
 
         output_file = report_folder / "analysis_report.html"
