@@ -108,7 +108,7 @@ Built using **Streamlit**, the dashboard provides:
 
 ### Dashboard
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/Dashboard.png)
 
 ---
 
