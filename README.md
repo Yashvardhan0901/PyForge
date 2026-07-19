@@ -106,6 +106,8 @@ Built using **Streamlit**, the dashboard provides:
 
 ## 🖥 Dashboard Preview
 
+## 🖥 Dashboard Preview
+
 ### Dashboard
 
 ![Dashboard](screenshots/Dashboard.png)
@@ -114,19 +116,19 @@ Built using **Streamlit**, the dashboard provides:
 
 ### Analytics
 
-![Charts](screenshots/charts.png)
+![Charts](screenshots/Charts.png)
 
 ---
 
 ### Code Smells
 
-![Code Smells](screenshots/smells.png)
+![Code Smells](screenshots/Smells.png)
 
 ---
 
 ### HTML Report
 
-![HTML Report](screenshots/report.png)
+![HTML Report](screenshots/Report.png)
 
 ---
 
