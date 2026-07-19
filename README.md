@@ -127,3 +127,171 @@ Built using **Streamlit**, the dashboard provides:
 ### HTML Report
 
 ![HTML Report](screenshots/report.png)
+
+---
+
+# 🏗 System Architecture
+
+```text
+                 +------------------------+
+                 |     Python Project     |
+                 +-----------+------------+
+                             |
+                             ▼
+                  Project Scanner
+                             |
+         +-------------------+-------------------+
+         |                   |                   |
+         ▼                   ▼                   ▼
+    AST Parser         Metrics Engine     Dependency Analyzer
+         |                   |                   |
+         +-------------------+-------------------+
+                             |
+                             ▼
+                    Project Analyzer
+                             |
+        +--------------------+--------------------+
+        |                                         |
+        ▼                                         ▼
+ Streamlit Dashboard                     HTML Report Generator
+```
+
+---
+
+# 📂 Project Structure
+
+```text
+PyForge/
+│
+├── assets/
+│   └── templates/
+│       └── report_template.html
+│
+├── pyforge/
+│   ├── scanner.py
+│   ├── parser.py
+│   ├── metrics.py
+│   ├── complexity.py
+│   ├── maintainability.py
+│   ├── dependency.py
+│   ├── code_smells.py
+│   ├── project_analyzer.py
+│   └── report_generator.py
+│
+├── reports/
+│
+├── screenshots/
+│
+├── streamlit_app.py
+├── app.py
+├── requirements.txt
+├── README.md
+└── LICENSE
+```
+
+---
+
+# 🛠 Technologies Used
+
+| Technology | Purpose |
+|------------|---------|
+| Python | Core Programming Language |
+| AST | Source Code Parsing |
+| Streamlit | Interactive Dashboard |
+| Plotly | Interactive Charts |
+| NetworkX | Dependency Graph |
+| Matplotlib | Graph Visualization |
+| Jinja2 | HTML Report Generation |
+| Pandas | Data Processing |
+| HTML/CSS | Report Styling |
+
+---
+
+# ⚙ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Yashvardhan0901/PyForge.git
+```
+
+Move into the project directory:
+
+```bash
+cd PyForge
+```
+
+Create a virtual environment (recommended):
+
+```bash
+python -m venv venv
+```
+
+Activate it:
+
+### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+### Linux / macOS
+
+```bash
+source venv/bin/activate
+```
+
+Install the dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# 🚀 Running PyForge
+
+Launch the Streamlit dashboard:
+
+```bash
+streamlit run streamlit_app.py
+```
+
+The application will open in your default web browser.
+
+Select a Python project folder and start the analysis.
+
+---
+
+# 📄 Generated Outputs
+
+PyForge automatically generates:
+
+- Interactive Streamlit Dashboard
+- Dependency Graph
+- HTML Analysis Report
+- Project Metrics Summary
+- Code Smell Analysis
+- Complexity Rankings
+- Maintainability Report
+
+Generated reports are saved in:
+
+```text
+reports/
+```
+
+---
+
+# 🔍 Example Analysis Workflow
+
+1. Select a Python project.
+2. Scan all Python files.
+3. Parse source code using Python AST.
+4. Extract project metrics.
+5. Calculate Cyclomatic Complexity.
+6. Compute Maintainability Index.
+7. Detect Code Smells.
+8. Build Dependency Graph.
+9. Display results in Streamlit.
+10. Generate a professional HTML report.
