@@ -295,3 +295,122 @@ reports/
 8. Build Dependency Graph.
 9. Display results in Streamlit.
 10. Generate a professional HTML report.
+
+---
+
+# 📈 Sample Metrics
+
+PyForge provides comprehensive insights into a Python codebase, including:
+
+- Total Python Files
+- Lines of Code (LOC)
+- Number of Classes
+- Number of Functions
+- Import Statements
+- Average Function Length
+- Cyclomatic Complexity
+- Maintainability Index
+- Health Score
+- Code Smell Summary
+
+These metrics help developers quickly understand the overall quality and maintainability of a project.
+
+---
+
+# 🎯 Use Cases
+
+PyForge is useful for:
+
+- Understanding unfamiliar Python projects
+- Code quality assessment
+- Software maintenance
+- Educational purposes
+- Project documentation
+- Code review preparation
+- Technical interviews
+- Portfolio demonstrations
+
+---
+
+# 🚀 Future Enhancements
+
+Some ideas for future versions of PyForge include:
+
+- PDF report generation
+- Export analysis as JSON or CSV
+- Support for Java and JavaScript projects
+- Git integration for commit-wise analysis
+- Historical trend analysis
+- Security vulnerability detection
+- Duplicate code detection
+- AI-powered code improvement suggestions
+- Docker support
+- CI/CD pipeline integration
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome!
+
+If you'd like to improve PyForge:
+
+1. Fork the repository
+2. Create a feature branch
+
+```bash
+git checkout -b feature-name
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push to your branch
+
+```bash
+git push origin feature-name
+```
+
+5. Open a Pull Request
+
+---
+
+# 📜 License
+
+This project is licensed under the **MIT License**.
+
+See the **LICENSE** file for details.
+
+---
+
+# 👨‍💻 Author
+
+**Yashvardhan Sahu**
+
+GitHub: https://github.com/Yashvardhan0901
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
+
+---
+
+# ⭐ Acknowledgements
+
+This project was inspired by modern static analysis tools including:
+
+- SonarQube
+- Radon
+- Pylint
+- Flake8
+
+while being designed as a lightweight educational and portfolio project.
+
+---
+
+<p align="center">
+
+⭐ If you like this project, don't forget to star the repository!
+
+</p>
