@@ -15,7 +15,8 @@ class ReportGenerator:
 
     def generate(self):
 
-        template_folder = Path("assets/templates")
+        BASE_DIR = Path(__file__).resolve().parent.parent
+        template_folder = BASE_DIR / "assets" / "templates"
 
         env = Environment(
             loader=FileSystemLoader(template_folder)
@@ -45,7 +46,7 @@ class ReportGenerator:
 
         )
 
-        report_folder = Path("reports")
+        report_folder = BASE_DIR / "reports"
 
         report_folder.mkdir(exist_ok=True)
 
